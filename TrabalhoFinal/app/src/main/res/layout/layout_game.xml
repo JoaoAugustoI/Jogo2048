@@ -70,7 +70,6 @@
         android:layout_below="@id/replay"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:padding="1dp"
         app:columnCount="6"
         app:columnOrderPreserved="true"
         app:rowCount="10"
@@ -85,8 +84,7 @@
             android:maxHeight="200px"
             android:minWidth="80px"
             android:minHeight="80px"
-            android:padding="1dp"
-            app:srcCompat="@android:color/darker_gray"
+            app:srcCompat="@android:color/white"
             tools:srcCompat="@android:color/primary_text_dark_nodisable" />
 
         <ImageView
@@ -98,8 +96,7 @@
             android:maxHeight="200px"
             android:minWidth="80px"
             android:minHeight="80px"
-            android:padding="1dp"
-            app:srcCompat="@android:color/darker_gray"
+            app:srcCompat="@android:color/white"
             tools:srcCompat="@android:color/primary_text_dark_nodisable" />
 
         <ImageView
@@ -111,8 +108,7 @@
             android:maxHeight="200px"
             android:minWidth="80px"
             android:minHeight="80px"
-            android:padding="1dp"
-            app:srcCompat="@android:color/darker_gray"
+            app:srcCompat="@android:color/white"
             tools:srcCompat="@android:color/primary_text_dark_nodisable" />
 
         <ImageView
@@ -124,8 +120,7 @@
             android:maxHeight="200px"
             android:minWidth="80px"
             android:minHeight="80px"
-            android:padding="1dp"
-            app:srcCompat="@android:color/darker_gray"
+            app:srcCompat="@android:color/white"
             tools:srcCompat="@android:color/primary_text_dark_nodisable" />
 
         <ImageView
@@ -137,8 +132,7 @@
             android:maxHeight="200px"
             android:minWidth="80px"
             android:minHeight="80px"
-            android:padding="1dp"
-            app:srcCompat="@android:color/darker_gray"
+            app:srcCompat="@android:color/white"
             tools:srcCompat="@android:color/primary_text_dark_nodisable" />
 
         <ImageView
@@ -150,8 +144,7 @@
             android:maxHeight="200px"
             android:minWidth="80px"
             android:minHeight="80px"
-            android:padding="1dp"
-            app:srcCompat="@android:color/darker_gray"
+            app:srcCompat="@android:color/white"
             tools:srcCompat="@android:color/primary_text_dark_nodisable" />
 
         <ImageView
