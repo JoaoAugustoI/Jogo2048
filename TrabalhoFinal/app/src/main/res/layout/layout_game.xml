@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/recorde"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TOP SCORE\n   0"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/pontos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="SCORE\n   0"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2048"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15px"
+        android:textSize="25dp"/>
+
+
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_with="wrap_content"
+        android:layout_width="wrap_content" />
+
+
 </RelativeLayout>
+
