@@ -33,10 +33,7 @@
         android:textSize="25dp"/>
 
 
-    <ImageView
-        android:layout_height="wrap_content"
-        android:layout_with="wrap_content"
-        android:layout_width="wrap_content" />
+
 
 
 </RelativeLayout>
