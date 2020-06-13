@@ -38,41 +38,38 @@ public class game extends AppCompatActivity
                 GridLayout.LayoutParams lp = new GridLayout.LayoutParams(linha,coluna);
 
                 ImageView iv = new ImageView(this);
-                iv.setImageResource(R.drawable.ic_action_name);
+                iv.setImageResource(R.drawable.squaree);
 
                 g1.addView(iv,lp);
             }
         }
-       // g2 = g1;
+        criacao();
         g2.addView(g1);
-        //setContentView(g1);
-//        criacao();
+        g1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int coluna = g1.getColumnCount();
+                if (coluna == 0)
+                {
 
-//        grid.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int coluna = grid.getColumnCount();
-//                if (coluna == 0)
-//                {
-//
-//                }else if(coluna == 1)
-//                {
-//
-//                }else if(coluna == 2)
-//                {
-//
-//                }else if(coluna == 3)
-//                {
-//
-//                }else if(coluna == 4)
-//                {
-//
-//                }else
-//                {
-//
-//                }
-//            }
-//        });
+                }else if(coluna == 1)
+                {
+
+                }else if(coluna == 2)
+                {
+
+                }else if(coluna == 3)
+                {
+
+                }else if(coluna == 4)
+                {
+
+                }else
+                {
+
+                }
+            }
+        });
 
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,20 +92,24 @@ public class game extends AppCompatActivity
     }
     public void criacao()
     {
+        int cont = 7,c;
+        for (int i = 0; i < 6; i++)
+        {
+            Random rand = new Random();
+            int r = rand.nextInt(7);
+            r = r+3;
+            vetcolunas[i] = r;
+            for (;r <= 9;r++)
+            {
+                GridLayout.Spec linha = GridLayout.spec(r);
+                GridLayout.Spec coluna = GridLayout.spec(i);
+                GridLayout.LayoutParams lp = new GridLayout.LayoutParams(linha,coluna);
 
-
-//        int cont = 7,comeco;
-//        for (int i = 1; i <= 6; i++)
-//        {
-//            Random rand = new Random();
-//            int r = rand.nextInt(7);
-//            r = r+3;
-//            comeco = 7*r + cont;
-//            for (;r <= 9;r++)
-//            {
-//
-//            }
-//            cont++;
-//        }
+                ImageView iv = new ImageView(this);
+                iv.setImageResource(R.drawable.ic_action_name);
+                g1.addView(iv,lp);
+            }
+            cont++;
+        }
     }
 }
