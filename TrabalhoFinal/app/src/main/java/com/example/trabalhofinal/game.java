@@ -29,7 +29,19 @@ public class game extends AppCompatActivity
         g1 = new GridLayout(this);
         g1.setColumnCount(6);
         g1.setRowCount(10);
-        for (int i = 0; i < 10; i++)
+
+        for (int j = 0; j < 6; j++)
+        {
+            GridLayout.Spec linha = GridLayout.spec(0);
+            GridLayout.Spec coluna = GridLayout.spec(j);
+            GridLayout.LayoutParams lp = new GridLayout.LayoutParams(linha,coluna);
+
+            ImageView iv = new ImageView(this);
+            iv.setImageResource(R.drawable.tranparente);
+
+            g1.addView(iv,lp);
+        }
+        for (int i = 1; i < 10; i++)
         {
             for (int j = 0; j < 6; j++)
             {
