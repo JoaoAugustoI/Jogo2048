@@ -42,7 +42,7 @@ public class game extends AppCompatActivity {
 
     androidx.gridlayout.widget.GridLayout vv;
     int vetcolunas[] = new int[6],c;
-    boolean muda = false,igual = false,ganhou = false;
+    boolean muda = false,ganhou = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -393,8 +393,8 @@ public class game extends AppCompatActivity {
                 v.setImageDrawable(d1);
                 muda = false;
             }else {
-                if(vetcolunas[coluna] > 5)
-                {
+//                if(vetcolunas[coluna] > 5)
+//                {
                     Drawable transp = getResources().getDrawable(tranparente);
                     //a coluna
                     ImageView v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna]);
@@ -407,7 +407,6 @@ public class game extends AppCompatActivity {
                     //junta
                     if(drawable.getConstantState().equals(d1.getConstantState()))
                     {
-                        igual = true;
                         v.setImageDrawable(transp);
                         if (drawable.getConstantState().equals(dois.getConstantState()))
                         {
@@ -436,17 +435,17 @@ public class game extends AppCompatActivity {
                         }else if (drawable.getConstantState().equals(quinhetos.getConstantState()))
                         {
                             v1.setImageDrawable(mil);
-                        }else{
+                        }else if(drawable.getConstantState().equals(mil.getConstantState())){
                             v1.setImageDrawable(doismil);
                             ganhou = true;
                         }
-
                         v = v1;
                         drawable = v.getDrawable();
                         if(vetcolunas[coluna] + 6 < 60) {
                             v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna] + 6);
                             d1 = v1.getDrawable();
-                            while (drawable.getConstantState().equals(d1.getConstantState()) && vetcolunas[coluna] + 6 < 60) {
+                            while (drawable.getConstantState().equals(d1.getConstantState()) && vetcolunas[coluna] + 6 < 60)
+                            {
                                 v.setImageDrawable(transp);
                                 if (drawable.getConstantState().equals(dois.getConstantState())) {
                                     v1.setImageDrawable(quatro);
@@ -466,7 +465,7 @@ public class game extends AppCompatActivity {
                                     v1.setImageDrawable(quinhetos);
                                 } else if (drawable.getConstantState().equals(quinhetos.getConstantState())) {
                                     v1.setImageDrawable(mil);
-                                } else {
+                                } else if(drawable.getConstantState().equals(mil.getConstantState())){
                                     v1.setImageDrawable(doismil);
                                     ganhou = true;
                                 }
@@ -475,19 +474,18 @@ public class game extends AppCompatActivity {
                                 drawable = v.getDrawable();
                                 if(vetcolunas[coluna] + 6 < 60)
                                      v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna] + 6);
+
                                 d1 = v1.getDrawable();
                             }
                         }
                         muda = false;
-                    }
+                        if(ganhou == true)
+                        {
+                            //tela de ganhou e começa de novo
+                        }
+                    }else {
 
-                    if(ganhou == true)
-                    {
-                        //tela de ganhou e começa de novo
-                    }
-                    //Aqui eu vejo se posso colocar uma sobre a outra, desde que seja menor que o quadrado de destino
-                    if(igual == false)
-                    {
+                        //Aqui eu vejo se posso colocar uma sobre a outra, desde que seja menor que o quadrado de destino
                         if(d1.getConstantState().equals(dois.getConstantState()))
                         {
                             drawable = getResources().getDrawable(tranparente);
@@ -603,7 +601,7 @@ public class game extends AppCompatActivity {
                         }
                     }
 
-                }
+//                }
                 if(muda == false)
                     geradordepedra();
             }
