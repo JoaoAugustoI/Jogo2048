@@ -405,12 +405,82 @@ public class game extends AppCompatActivity {
 
                     //Quando eu junto duas iguais
                     //junta
-
-                    while(drawable.getConstantState().equals(d1.getConstantState()))
+                    if(drawable.getConstantState().equals(d1.getConstantState()))
                     {
                         igual = true;
-                       // muda = false;
+                        v.setImageDrawable(transp);
+                        if (drawable.getConstantState().equals(dois.getConstantState()))
+                        {
+                            v1.setImageDrawable(quatro);
+                        }else if (drawable.getConstantState().equals(quatro.getConstantState()))
+                        {
+                            v1.setImageDrawable(oito);
+                        }else if (drawable.getConstantState().equals(oito.getConstantState()))
+                        {
+                            v1.setImageDrawable(dezesseis);
+                        }else if (drawable.getConstantState().equals(dezesseis.getConstantState()))
+                        {
+                            v1.setImageDrawable(trintadois);
+                        }else if (drawable.getConstantState().equals(trintadois.getConstantState()))
+                        {
+                            v1.setImageDrawable(sessentaequatro);
+                        }else if (drawable.getConstantState().equals(sessentaequatro.getConstantState()))
+                        {
+                            v1.setImageDrawable(cento);
+                        }else if (drawable.getConstantState().equals(cento.getConstantState()))
+                        {
+                            v1.setImageDrawable(duzentos);
+                        }else if (drawable.getConstantState().equals(duzentos.getConstantState()))
+                        {
+                            v1.setImageDrawable(quinhetos);
+                        }else if (drawable.getConstantState().equals(quinhetos.getConstantState()))
+                        {
+                            v1.setImageDrawable(mil);
+                        }else{
+                            v1.setImageDrawable(doismil);
+                            ganhou = true;
+                        }
+
+                        v = v1;
+                        drawable = v.getDrawable();
+                        if(vetcolunas[coluna] + 6 < 60) {
+                            v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna] + 6);
+                            d1 = v1.getDrawable();
+                            while (drawable.getConstantState().equals(d1.getConstantState()) && vetcolunas[coluna] + 6 < 60) {
+                                v.setImageDrawable(transp);
+                                if (drawable.getConstantState().equals(dois.getConstantState())) {
+                                    v1.setImageDrawable(quatro);
+                                } else if (drawable.getConstantState().equals(quatro.getConstantState())) {
+                                    v1.setImageDrawable(oito);
+                                } else if (drawable.getConstantState().equals(oito.getConstantState())) {
+                                    v1.setImageDrawable(dezesseis);
+                                } else if (drawable.getConstantState().equals(dezesseis.getConstantState())) {
+                                    v1.setImageDrawable(trintadois);
+                                } else if (drawable.getConstantState().equals(trintadois.getConstantState())) {
+                                    v1.setImageDrawable(sessentaequatro);
+                                } else if (drawable.getConstantState().equals(sessentaequatro.getConstantState())) {
+                                    v1.setImageDrawable(cento);
+                                } else if (drawable.getConstantState().equals(cento.getConstantState())) {
+                                    v1.setImageDrawable(duzentos);
+                                } else if (drawable.getConstantState().equals(duzentos.getConstantState())) {
+                                    v1.setImageDrawable(quinhetos);
+                                } else if (drawable.getConstantState().equals(quinhetos.getConstantState())) {
+                                    v1.setImageDrawable(mil);
+                                } else {
+                                    v1.setImageDrawable(doismil);
+                                    ganhou = true;
+                                }
+                                vetcolunas[coluna] = vetcolunas[coluna] + 6;
+                                v = v1;
+                                drawable = v.getDrawable();
+                                if(vetcolunas[coluna] + 6 < 60)
+                                     v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna] + 6);
+                                d1 = v1.getDrawable();
+                            }
+                        }
+                        muda = false;
                     }
+
                     if(ganhou == true)
                     {
                         //tela de ganhou e começa de novo
@@ -531,8 +601,6 @@ public class game extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Não dá cara",Toast.LENGTH_SHORT).show();
                             }
                         }
-                    }else{
-                        v.setImageDrawable(transp);
                     }
 
                 }
