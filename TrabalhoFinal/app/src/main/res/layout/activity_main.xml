@@ -4,30 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fundohome"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
         android:id="@+id/titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2048"
-        android:textColor="#000"
+        android:layout_width="227dp"
+        android:layout_height="85dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:textSize="70dp"/>
+        android:background="@drawable/doismillara"/>
     <TextView
-        android:textColor="#000"
+        android:textColor="#2196F3"
         android:id="@+id/scoreTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Top Score"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/titulo"
         android:textSize="50dp"/>
     <TextView
-        android:textColor="#000"
+        android:textColor="#03A9F4"
         android:id="@+id/score"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -43,7 +44,7 @@
         android:layout_below="@+id/score"
         android:layout_centerInParent="true"
         android:layout_marginTop="50dp"
-        android:background="@drawable/play3" />
+        android:background="@drawable/playcert" />
 
 
 
