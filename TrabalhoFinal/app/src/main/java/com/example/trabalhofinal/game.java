@@ -435,6 +435,7 @@ public class game extends AppCompatActivity {
                         }
                         v = v1;
                         drawable = v.getDrawable();
+                        muda = false;
                         if(vetcolunas[coluna] + 6 < 60) {
                             v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna] + 6);
                             d1 = v1.getDrawable();
