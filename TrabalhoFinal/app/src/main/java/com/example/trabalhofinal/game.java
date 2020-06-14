@@ -2,6 +2,7 @@ package com.example.trabalhofinal;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,19 +12,127 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TableLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+
+import java.util.Random;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Random;
 
 public class game extends AppCompatActivity
 {
     int vetcolunas[] = new int[6];
     GridLayout g1,g2;
+    //lara
+    ImageView pause, play, home, semSom, help;
+    TableLayout tableLayout;
+    int pontos = 0, pontosMax = 0;
+    AdView mAdView;
+    TextView scoreMax;
+    private InterstitialAd mInterstitialAd;
+    Button btn;
+    //fimlara
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_game);
 
+        //lara
+        play = findViewById(R.id.play);
+        pause = findViewById(R.id.pause);
+        home = findViewById(R.id.home);
+        tableLayout = findViewById(R.id.layoutPause);
+        btn = findViewById(R.id.teste);
+
+        scoreMax = findViewById(R.id.pontos);
+        SharedPreferences prefs = getSharedPreferences("recorde", MODE_PRIVATE);
+        pontosMax = prefs.getInt("recorde", 0);
+        scoreMax.setText("Recorde: " + pontosMax);
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pontos++;
+                if(pontos > pontosMax) {
+                    pontosMax = pontos;
+                    scoreMax.setText("Recorde: " + pontosMax);
+                }
+                //salvar o record, mas antes tem que salvar os pontos
+                SharedPreferences prefs = getSharedPreferences("recorde", MODE_PRIVATE);
+                SharedPreferences.Editor edt = prefs.edit();
+                edt.putInt("recorde", pontosMax);
+                edt.apply();
+
+
+//                Intent i = new Intent(game.this, Pause.class);
+//                startActivity(i);
+
+            }
+        });
+
+
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tableLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tableLayout.setVisibility(View.INVISIBLE);
+            }
+        });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(game.this, MainActivity.class);
+                i.putExtra("pontMax", String.valueOf(pontosMax));
+                startActivity(i);
+            }
+        });
+
+
+        //larafim
+
         final ImageView replay = (ImageView) findViewById(R.id.replay);
-        final ImageView pause = (ImageView) findViewById(R.id.pause);
+       // final ImageView pause = (ImageView) findViewById(R.id.pause);
 
         g2 = (GridLayout) findViewById(R.id.grid);
         g1 = new GridLayout(this);
@@ -83,14 +192,14 @@ public class game extends AppCompatActivity
             }
         });
 
-        pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent i =  new Intent(game.this,Pause.class);
-                startActivity(i);
-            }
-        });
+//        pause.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                Intent i =  new Intent(game.this,Pause.class);
+//                startActivity(i);
+//            }
+//        });
 
         replay.setOnClickListener(new View.OnClickListener() {
             @Override
