@@ -12,6 +12,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -24,6 +25,7 @@ import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.Random;
 
+import static com.example.trabalhofinal.R.drawable.centoevinte;
 import static com.example.trabalhofinal.R.drawable.tranparente;
 
 public class game extends AppCompatActivity {
@@ -40,7 +42,7 @@ public class game extends AppCompatActivity {
 
     androidx.gridlayout.widget.GridLayout vv;
     int vetcolunas[] = new int[6],c;
-    boolean muda = false;
+    boolean muda = false,igual = false,ganhou = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -357,7 +359,7 @@ public class game extends AppCompatActivity {
     {
         ImageView v;
         Drawable drawable,d1;
-        if(muda == false)
+        if(muda == false )
         {
             v = (ImageView) vv.findViewWithTag(tag);
             d1 = v.getDrawable();
@@ -369,6 +371,17 @@ public class game extends AppCompatActivity {
             muda = true;
             c = coluna;
         }else {
+            Drawable dois = getResources().getDrawable(R.drawable.doois);
+            Drawable quatro = getResources().getDrawable(R.drawable.quatro);
+            Drawable oito = getResources().getDrawable(R.drawable.oito);
+            Drawable dezesseis = getResources().getDrawable(R.drawable.dezeseis);
+            Drawable trintadois = getResources().getDrawable(R.drawable.trintaedois);
+            Drawable sessentaequatro = getResources().getDrawable(R.drawable.sessentaequatro);
+            Drawable cento = getResources().getDrawable(R.drawable.centoevinte);
+            Drawable duzentos = getResources().getDrawable(R.drawable.duzentos);
+            Drawable quinhetos = getResources().getDrawable(R.drawable.quinhentos);
+            Drawable mil = getResources().getDrawable(R.drawable.mil);
+            Drawable doismil = getResources().getDrawable(R.drawable.doismil);
             if(c == coluna)
             {
                 v = (ImageView) vv.findViewWithTag(coluna);
@@ -382,33 +395,202 @@ public class game extends AppCompatActivity {
             }else {
                 if(vetcolunas[coluna] > 5)
                 {
-                    boolean igual = false;
+                    Drawable transp = getResources().getDrawable(tranparente);
+                    //a coluna
                     ImageView v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna]);
                     drawable = v1.getDrawable();
+                    //pedra que esta em cima
                     v = (ImageView) vv.findViewWithTag(c);
                     d1 = v.getDrawable();
-                    while(drawable == d1)
+
+                    //Quando eu junto duas iguais
+                    //junta
+
+                    while(drawable.getConstantState().equals(d1.getConstantState()))
                     {
                         igual = true;
+                       // muda = false;
                     }
-
+                    if(ganhou == true)
+                    {
+                        //tela de ganhou e começa de novo
+                    }
+                    //Aqui eu vejo se posso colocar uma sobre a outra, desde que seja menor que o quadrado de destino
                     if(igual == false)
                     {
-                        Drawable aux = getResources().getDrawable(R.drawable.doois);
-
-                        if(v.getDrawable() == aux)
+                        if(d1.getConstantState().equals(dois.getConstantState()))
                         {
                             drawable = getResources().getDrawable(tranparente);
                             v.setImageDrawable(drawable);
                             v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna]-6);
-                            v1.setImageDrawable(aux);
+                            v1.setImageDrawable(dois);
+                            vetcolunas[coluna] = vetcolunas[coluna]-6;
+                            muda = false;
+                        }else if(d1.getConstantState().equals(quatro.getConstantState()))
+                        {
+                            if(!(drawable.getConstantState().equals(dois.getConstantState())))
+                            {
+                                drawable = getResources().getDrawable(tranparente);
+                                v.setImageDrawable(drawable);
+                                v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna]-6);
+                                v1.setImageDrawable(quatro);
+                                vetcolunas[coluna] = vetcolunas[coluna]-6;
+                                muda = false;
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Não dá cara",Toast.LENGTH_SHORT).show();
+                            }
+                        }else if(d1.getConstantState().equals(oito.getConstantState()))
+                        {
+                            if(!(drawable.getConstantState().equals(dois.getConstantState())) && !(drawable.getConstantState().equals(quatro.getConstantState())))
+                            {
+                                drawable = getResources().getDrawable(tranparente);
+                                v.setImageDrawable(drawable);
+                                v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna]-6);
+                                v1.setImageDrawable(oito);
+                                vetcolunas[coluna] = vetcolunas[coluna]-6;
+                                muda = false;
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Não dá cara",Toast.LENGTH_SHORT).show();
+                            }
+                        }else if(d1.getConstantState().equals(dezesseis.getConstantState()))
+                        {
+                            if(!(drawable.getConstantState().equals(dois.getConstantState())) && !(drawable.getConstantState().equals(quatro.getConstantState())) && !(drawable.getConstantState().equals(oito.getConstantState())))
+                            {
+                                drawable = getResources().getDrawable(tranparente);
+                                v.setImageDrawable(drawable);
+                                v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna]-6);
+                                v1.setImageDrawable(dezesseis);
+                                vetcolunas[coluna] = vetcolunas[coluna]-6;
+                                muda = false;
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Não dá cara",Toast.LENGTH_SHORT).show();
+                            }
+                        }else if(d1.getConstantState().equals(trintadois.getConstantState()))
+                        {
+                            if(!(drawable.getConstantState().equals(dois.getConstantState())) && !(drawable.getConstantState().equals(quatro.getConstantState())) && !(drawable.getConstantState().equals(oito.getConstantState())) && !(drawable.getConstantState().equals(dezesseis.getConstantState())))
+                            {
+                                drawable = getResources().getDrawable(tranparente);
+                                v.setImageDrawable(drawable);
+                                v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna]-6);
+                                v1.setImageDrawable(trintadois);
+                                vetcolunas[coluna] = vetcolunas[coluna]-6;
+                                muda = false;
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Não dá cara",Toast.LENGTH_SHORT).show();
+                            }
+                        }else if(d1.getConstantState().equals(sessentaequatro.getConstantState()))
+                        {
+                            if(!(drawable.getConstantState().equals(dois.getConstantState())) && !(drawable.getConstantState().equals(quatro.getConstantState())) && !(drawable.getConstantState().equals(oito.getConstantState())) && !(drawable.getConstantState().equals(dezesseis.getConstantState())) && !(drawable.getConstantState().equals(trintadois.getConstantState())))
+                            {
+                                drawable = getResources().getDrawable(tranparente);
+                                v.setImageDrawable(drawable);
+                                v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna]-6);
+                                v1.setImageDrawable(sessentaequatro);
+                                vetcolunas[coluna] = vetcolunas[coluna]-6;
+                                muda = false;
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Não dá cara",Toast.LENGTH_SHORT).show();
+                            }
+                        }else if(d1.getConstantState().equals(cento.getConstantState()))
+                        {
+                            if((drawable.getConstantState().equals(duzentos.getConstantState())) || (drawable.getConstantState().equals(quinhetos.getConstantState())) || (drawable.getConstantState().equals(mil.getConstantState())))
+                            {
+                                drawable = getResources().getDrawable(tranparente);
+                                v.setImageDrawable(drawable);
+                                v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna]-6);
+                                v1.setImageDrawable(cento);
+                                vetcolunas[coluna] = vetcolunas[coluna]-6;
+                                muda = false;
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Não dá cara",Toast.LENGTH_SHORT).show();
+                            }
+                        }else if(d1.getConstantState().equals(duzentos.getConstantState()))
+                        {
+                            if((drawable.getConstantState().equals(quinhetos.getConstantState())) || (drawable.getConstantState().equals(mil.getConstantState())))
+                            {
+                                drawable = getResources().getDrawable(tranparente);
+                                v.setImageDrawable(drawable);
+                                v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna]-6);
+                                v1.setImageDrawable(duzentos);
+                                vetcolunas[coluna] = vetcolunas[coluna]-6;
+                                muda = false;
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Não dá cara",Toast.LENGTH_SHORT).show();
+                            }
+                        }else if(d1.getConstantState().equals(quinhetos.getConstantState()))
+                        {
+                            if((drawable.getConstantState().equals(mil.getConstantState())))
+                            {
+                                drawable = getResources().getDrawable(tranparente);
+                                v.setImageDrawable(drawable);
+                                v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna]-6);
+                                v1.setImageDrawable(quinhetos);
+                                vetcolunas[coluna] = vetcolunas[coluna]-6;
+                                muda = false;
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Não dá cara",Toast.LENGTH_SHORT).show();
+                            }
                         }
+                    }else{
+                        v.setImageDrawable(transp);
                     }
 
                 }
+                if(muda == false)
+                    geradordepedra();
             }
         }
     }
+
+    public void geradordepedra()
+    {
+        Drawable dois = getResources().getDrawable(R.drawable.doois);
+        Drawable quatro = getResources().getDrawable(R.drawable.quatro);
+        Drawable oito = getResources().getDrawable(R.drawable.oito);
+        Drawable dezesseis = getResources().getDrawable(R.drawable.dezeseis);
+        Random rand = new Random();
+        int r = rand.nextInt(3),a,oto;
+        Drawable drawable = getResources().getDrawable(R.drawable.doois),d1;
+        boolean ver[] = new boolean[6],perdeu = false;
+        for (int i = 0; i < r+1; i++)
+        {
+            a = rand.nextInt(6);
+            while(ver[a] == true)
+            {
+                a = (a+1)%6;
+            }
+            ver[a] = true;
+            vetcolunas[a] -=6;
+            oto = rand.nextInt(4);
+
+            if(oto == 0) drawable = getResources().getDrawable(R.drawable.doois);
+            else if(oto == 1) drawable = getResources().getDrawable(R.drawable.quatro);
+            else if(oto == 2) drawable = getResources().getDrawable(R.drawable.oito);
+            else if(oto == 3) drawable = getResources().getDrawable(R.drawable.dezeseis);
+
+            ImageView v1 = (ImageView) vv.findViewWithTag(vetcolunas[a]+6);
+            d1 = v1.getDrawable();
+            if(d1.getConstantState().equals(drawable.getConstantState()))
+            {
+                if(d1.getConstantState().equals(dois.getConstantState())) drawable = getResources().getDrawable(R.drawable.quatro);
+                else if(d1.getConstantState().equals(quatro.getConstantState())) drawable = getResources().getDrawable(R.drawable.oito);
+                else if(d1.getConstantState().equals(oito.getConstantState())) drawable = getResources().getDrawable(R.drawable.dezeseis);
+                else drawable = getResources().getDrawable(R.drawable.doois);
+            }
+
+            if(vetcolunas[a] < 6)
+                perdeu = true;
+
+            v1 = (ImageView) vv.findViewWithTag(vetcolunas[a]);
+            v1.setImageDrawable(drawable);
+        }
+
+        if(perdeu == true)
+        {
+            //tela game over
+        }
+    }
+
     public void geracao()
     {
         int comeco = 24;
