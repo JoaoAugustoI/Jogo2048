@@ -334,22 +334,16 @@ public class game extends AppCompatActivity {
             System.out.println("Resultado: " + tag);
 
             if (tag % 6 == 0) {
-                if(vetcolunas[0] <= 54 || c == 0)
                     movimenta(vetcolunas[0],0);
             } else if (tag % 6 == 1) {
-                if(vetcolunas[1] <= 55 || c == 1)
                  movimenta(vetcolunas[1],1);
             } else if (tag % 6 == 2) {
-                if(vetcolunas[2] <= 56 || c == 2)
                     movimenta(vetcolunas[2],2);
             } else if (tag % 6 == 3 ) {
-                if(vetcolunas[3] <= 57 || c == 3)
                     movimenta(vetcolunas[3],3);
             } else if (tag % 6 == 4) {
-                if(vetcolunas[4] <= 58 || c == 4)
                      movimenta(vetcolunas[4],4);
             } else {
-                if(vetcolunas[5] <= 59 || c == 5)
                     movimenta(vetcolunas[5],5);
             }
         }
@@ -444,7 +438,7 @@ public class game extends AppCompatActivity {
                         if(vetcolunas[coluna] + 6 < 60) {
                             v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna] + 6);
                             d1 = v1.getDrawable();
-                            while (drawable.getConstantState().equals(d1.getConstantState()) && vetcolunas[coluna] + 6 < 60)
+                            while (drawable.getConstantState().equals(d1.getConstantState()) && vetcolunas[coluna] < 60)
                             {
                                 v.setImageDrawable(transp);
                                 if (drawable.getConstantState().equals(dois.getConstantState())) {
@@ -472,7 +466,7 @@ public class game extends AppCompatActivity {
                                 vetcolunas[coluna] = vetcolunas[coluna] + 6;
                                 v = v1;
                                 drawable = v.getDrawable();
-                                if(vetcolunas[coluna] + 6 < 60)
+                                if(vetcolunas[coluna]  < 60)
                                      v1 = (ImageView) vv.findViewWithTag(vetcolunas[coluna] + 6);
 
                                 d1 = v1.getDrawable();
@@ -482,6 +476,7 @@ public class game extends AppCompatActivity {
                         if(ganhou == true)
                         {
                             //tela de ganhou e começa de novo
+                            Toast.makeText(getApplicationContext(),"Ganhei",Toast.LENGTH_SHORT).show();
                         }
                     }else {
 
