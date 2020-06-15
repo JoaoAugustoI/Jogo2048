@@ -65,6 +65,29 @@ public class game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_game);
         replay = (ImageView) findViewById(R.id.replay);
+
+        replay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TableLayout table = findViewById(R.id.tableLayoutPrincipal);
+                View child = null;
+                for (int i = 0; i < table.getChildCount(); i++) {
+                    TableRow tableRow = (TableRow) table.getChildAt(i);
+                    for (int j = 0; j < tableRow.getChildCount(); ++j) {
+                        child = tableRow.getChildAt(j);
+                        Button btn = (Button)child;
+                        btn.setText("");
+                        btn.setBackgroundResource(android.R.drawable.btn_default);
+                        btn.setVisibility(i == 0 ? View.INVISIBLE : View.VISIBLE);
+                    }
+
+
+                }
+                popularGrid();
+                inicializar();
+            }
+        });
+
         desabilitaSom = findViewById(R.id.semSom);
 
         somJuntoNumeros = MediaPlayer.create(game.this,R.raw.juntou);
@@ -380,27 +403,7 @@ public class game extends AppCompatActivity {
             }
         }
 
-        replay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TableLayout table = findViewById(R.id.tableLayoutPrincipal);
-                View child = null;
-                for (int i = 0; i < table.getChildCount(); i++) {
-                    TableRow tableRow = (TableRow) table.getChildAt(i);
-                    for (int j = 0; j < tableRow.getChildCount(); ++j) {
-                        child = tableRow.getChildAt(j);
-                        Button btn = (Button)child;
-                        btn.setText("");
-                        btn.setBackgroundResource(android.R.drawable.btn_default);
-                        btn.setVisibility(i == 0 ? View.INVISIBLE : View.VISIBLE);
-                    }
 
-
-                }
-                popularGrid();
-                inicializar();
-            }
-        });
 
 
     }
