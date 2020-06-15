@@ -24,7 +24,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         play = findViewById(R.id.play);
+        Intent intent = getIntent();
+        String nome = intent.getStringExtra("recorde");
+        scoreMax = findViewById(R.id.score);
+        scoreMax.setText(nome);
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
