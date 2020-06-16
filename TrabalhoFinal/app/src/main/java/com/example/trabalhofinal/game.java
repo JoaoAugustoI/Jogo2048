@@ -89,7 +89,6 @@ public class game extends AppCompatActivity {
         });
 
         desabilitaSom = findViewById(R.id.semSom);
-
         somJuntoNumeros = MediaPlayer.create(game.this,R.raw.juntou);
         replayGameOver = findViewById(R.id.replayGameOver);
         homeGameover = findViewById(R.id.homeGameover);
@@ -197,10 +196,9 @@ public class game extends AppCompatActivity {
     public void inicializar()
     {
         pontos = 0;
-        pontosMax = 0;
         vida = 100;
+        recordeAtual.setText("Score: " + String.valueOf(pontos));
         progressBar.setProgress(vida);
-        pontos = 0;
         quantidadeDeClicks = 0;
         btnDestino = null;
         btnClicado = null;
@@ -315,31 +313,52 @@ public class game extends AppCompatActivity {
     }
     public void onClickBtnButons(View v) {
         Button button = (Button) v;
-        button =  verificaTopo(button);
-        if(button.getText().toString().equals("")) {
-            return;
+        quantidadeDeClicks++;
+        if(button.getText().toString().equals("") && quantidadeDeClicks == 2)
+        {
+            button =  verificaTopo(button);
+            int id = button.getId();
+            String nameId = getResources().getResourceEntryName(id);
+            String[] posicao = nameId.split("-");
+            posicao[0] = posicao[0].replaceAll("btn", "");
+            String numeroButton = button.getText().toString();
+            int linha = Integer.parseInt(posicao[0]);
+            if(linha == 9 && button.getText().toString().equals("")) {
+                quantidadeDeClicks = 0;
+                button.setText(btnDestino.getText().toString());
+                coloriBtn(button);
+                btnClicado.setBackgroundResource(android.R.drawable.btn_default);
+                btnClicado.setText("");
+                btnClicado.setVisibility(View.VISIBLE);
+                btnDestino.setText("");
+                btnDestino.setBackgroundResource(android.R.drawable.btn_default);
+                btnDestino.setVisibility(View.INVISIBLE);
+                return;
+            }
         }
+        button =  verificaTopo(button);
+
         int id = button.getId();
         String nameId = getResources().getResourceEntryName(id);
         String[] posicao = nameId.split("-");
         posicao[0] = posicao[0].replaceAll("btn", "");
         String numeroButton = button.getText().toString();
 
-        quantidadeDeClicks++;
+
         if (quantidadeDeClicks == 1) {
-            vida -= 20;
+            if(vida > 20)
+                vida -= 20;
             progressBar.setProgress(vida);
-            if(vida == 0)
-                gameOver();
-            else {
-                btnDestino = getButton("btn" + "0-" + posicao[1]);
-                btnDestino.setVisibility(View.VISIBLE);
-                btnDestino.setText(numeroButton);
-                int cor = ((ColorDrawable)button.getBackground()).getColor();
-                btnDestino.setBackgroundColor(cor);
-                button.setVisibility(View.INVISIBLE);
-                btnClicado = button;
-            }
+
+
+            btnDestino = getButton("btn" + "0-" + posicao[1]);
+            btnDestino.setVisibility(View.VISIBLE);
+            btnDestino.setText(numeroButton);
+            int cor = ((ColorDrawable)button.getBackground()).getColor();
+            btnDestino.setBackgroundColor(cor);
+            button.setVisibility(View.INVISIBLE);
+            btnClicado = button;
+
         } else {
             quantidadeDeClicks = 0;
             if(posicao[0].equals("0"))
@@ -357,15 +376,15 @@ public class game extends AppCompatActivity {
                 if (numeroButton.equals(numeroButtonAnterior)) {
                     if(button.getVisibility() == View.INVISIBLE)
                     {
+                        vida += 20;
+                        progressBar.setProgress(vida);
                         button.setVisibility(View.VISIBLE);
                         btnDestino.setVisibility(View.INVISIBLE);
                         quantidadeDeClicks = 0;
                         return;
                     }
-
                     vida += 20;
                     progressBar.setProgress(vida);
-
                     int intTextBtnDestino = Integer.parseInt(numeroButtonAnterior);
                     int intTextBtnLocal = Integer.parseInt(numeroButton);
                     int soma = intTextBtnDestino + intTextBtnLocal;
@@ -383,29 +402,34 @@ public class game extends AppCompatActivity {
                     somaButons(button, posicao[0], posicao[1]);
 
                 } else {
-                    vida -= 20;
-                    progressBar.setProgress(vida);
-                    if(vida == 0)
-                        gameOver();
-                    else {
-                        if (createButton(btnClicado, numeroButton, true) &&
-                                createButton(button, btnDestino.getText().toString(), false)) {
-                            btnClicado.setText("");
-                           btnClicado.setBackgroundResource(android.R.drawable.btn_default);
-                            btnClicado.setVisibility(View.VISIBLE);
-                            btnDestino.setVisibility(View.INVISIBLE);
-                        } else {
+                    if(Integer.parseInt(button.getText().toString()) < Integer.parseInt(btnClicado.getText().toString()))
+                    {
+                        Toast.makeText(game.this, "Voce não pode selecionar números menores!", Toast.LENGTH_SHORT).show();
+                        quantidadeDeClicks++;
+                        vida += 20;
+                        progressBar.setProgress(vida);
+                    }
+                    else
+                    {
+                        vida -= 20;
+                        progressBar.setProgress(vida);
+                        if(vida == 0)
                             gameOver();
+                        else {
+                            if (createButton(btnClicado, numeroButton, true) &&
+                                    createButton(button, btnDestino.getText().toString(), false)) {
+                                btnClicado.setText("");
+                                btnClicado.setBackgroundResource(android.R.drawable.btn_default);
+                                btnClicado.setVisibility(View.VISIBLE);
+                                btnDestino.setVisibility(View.INVISIBLE);
+                            } else {
+                                gameOver();
+                            }
                         }
                     }
                 }
-
             }
         }
-
-
-
-
     }
 
     private void gameOver()
@@ -471,7 +495,7 @@ public class game extends AppCompatActivity {
                         linhaNovo--;
                         btnNovo = getButton("btn" + String.valueOf(linhaNovo) + "-" + posicaoBtnNovo[1]);
                         gerarNumeroButton(gerador, 1, btnNovo, btnTopo);
-                        if(Integer.parseInt(btnNovo.getText().toString()) < numeroTopo )
+                        if(Integer.parseInt(btnNovo.getText().toString()) <= 16 )
                         {
                             return true;
                         }
@@ -526,6 +550,10 @@ public class game extends AppCompatActivity {
             String textBtnLocal = btnLocal.getText().toString();
             if(textBtnDeBaixo.equals(textBtnLocal))
             {
+                if(vida < 100) {
+                    vida += 20;
+                    progressBar.setProgress(vida);
+                }
                 somJuntoNumeros.start();
                 int intTextBtnDeBaixo = Integer.parseInt(textBtnDeBaixo);
                 int intTextBtnLocal = Integer.parseInt(textBtnLocal);
