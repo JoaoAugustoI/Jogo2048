@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String nome = intent.getStringExtra("recorde");
 
-
         scoreMax = findViewById(R.id.score);
 
         scoreMax.setText(nome);
